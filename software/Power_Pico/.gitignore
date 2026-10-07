@@ -1,0 +1,9 @@
+/build/
+/MDK-ARM/Objects/
+/MDK-ARM/Listings/
+*.uvguix.*
+*.bak
+
+# Local validation output.
+*_result_*.json
+*_build.log
