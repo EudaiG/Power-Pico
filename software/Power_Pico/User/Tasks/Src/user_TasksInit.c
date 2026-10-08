@@ -74,8 +74,8 @@ const osThreadAttr_t KeyTask_attributes = {
 osThreadId_t PDUFPTaskHandle;
 const osThreadAttr_t PDUFPTask_attributes = {
   .name = "PDUFPTask",
-  .stack_size = 128 * 16,
-  .priority = (osPriority_t) osPriorityLow2,
+  .stack_size = 128 * 6,
+  .priority = (osPriority_t) osPriorityHigh1,
 };
 
 // LVGL Handler task
