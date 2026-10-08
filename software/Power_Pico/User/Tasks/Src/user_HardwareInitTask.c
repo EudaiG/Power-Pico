@@ -92,6 +92,7 @@ void HardwareInitTask(void *argument)
 
     Sys_AdcCalibration_Init();
 
+    user_hardware_ready = true;
     xTaskResumeAll();
 		vTaskDelete(NULL);
 	}

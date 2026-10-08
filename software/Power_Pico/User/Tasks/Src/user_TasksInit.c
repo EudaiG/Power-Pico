@@ -30,6 +30,7 @@
 
 /* Timers --------------------------------------------------------------------*/
 osTimerId_t IdleTimerHandle;
+volatile bool user_hardware_ready;
 
 
 /* Tasks ---------------------------------------------------------------------*/
@@ -45,8 +46,12 @@ const osThreadAttr_t HardwareInitTask_attributes = {
 osThreadId_t MessageReceiveTaskHandle;
 const osThreadAttr_t MessageReceiveTask_attributes = {
   .name = "MsgRecTask",
+  /* RX parsing keeps request/response buffers on the stack, and may block in
+   * the RTOS reply queue. Leave room for nested calls and saved FP context. */
   .stack_size = 128 * 8,
-  .priority = (osPriority_t) osPriorityNormal2,
+  /* Prioritize CMD/OTA parsing over ADC transmission. Keep command batches
+   * bounded and yield between polling cycles. */
+  .priority = (osPriority_t) osPriorityHigh1,
 };
 
 // message send task
@@ -101,7 +106,6 @@ osMessageQueueId_t PD_handle_event_MsgQueue;
 osMessageQueueId_t PowerDataQueue;
 osMessageQueueId_t CmdRxQueue;
 osMessageQueueId_t CmdTxQueue;
-volatile uint32_t CmdRxOverflowCount;
 
 /* Private function prototypes -----------------------------------------------*/
 void LvHandlerTask(void *argument);
