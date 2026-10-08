@@ -1,7 +1,12 @@
 #include "user_AdcDataStrategy.h"
-#include "BL24C02.h"
+
 #include "gate.h"
 #include "tim.h"
+#include "usb_device.h"
+#include "usbd_cdc_if.h"
+#include "user_TasksInit.h"
+#include "pico_diag.h"
+#include "BL24C02.h"
 #include <math.h>
 
 // DMA 双缓冲原始数据
@@ -344,5 +349,8 @@ USB_ADC_Packet_t *Process_ADC_Chunk(uint16_t *chunk_ptr, uint8_t packet_idx)
         Data_Monitor_Calculate_Average();
     }
 
+    if (!USER_USB_is_Configured() || pico_diag_usb_service()) {
+        return NULL;
+    }
     return pkg;
 }

@@ -6,6 +6,7 @@
 #include "adc.h"
 #include "user_AdcDataStrategy.h"
 #include "i2c.h"
+#include "pico_diag.h"
 
 // user
 #include "user_TasksInit.h"
@@ -68,6 +69,8 @@ void HardwareInitTask(void *argument)
 
     // key
     Key_Init();
+
+    pico_diag_storage_init();
 
     // FUSB CC pin dis connect
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
