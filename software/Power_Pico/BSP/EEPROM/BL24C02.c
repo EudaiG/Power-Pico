@@ -60,8 +60,7 @@ static SysSettings_T sys_settings = {
 	.current_range_mode = GATE_MODE_AUTO
 };
 
-// Runtime ADC calibration. Kept here so it survives a power cycle once
-// written, while the conversion path still reads it on every sample.
+// Runtime calibration cache; EEPROM holds the persistent copy.
 static ADC_Calibration_t adc_calibration;
 static bool calibration_initialized;
 
@@ -300,8 +299,7 @@ bool EEPROM_AdcCalibration_Save(const ADC_Calibration_t *calibration)
 	       WriteVerified(EEPROM_SYS_SETTINGS_ADDRESS, &storage, sizeof(storage));
 }
 
-// Load ADC calibration. Invalid or blank EEPROM content falls back to the
-// hardware scale defaults so a bad write can never distort measurements.
+// Use hardware scale defaults if the EEPROM read or record validation fails.
 void EEPROM_AdcCalibration_Get(ADC_Calibration_t *calibration)
 {
 	SysSettingsStorage_T storage;

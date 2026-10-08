@@ -70,8 +70,6 @@ void HardwareInitTask(void *argument)
     if(!EEPROM_Init_Check()) {
       EEPROM_SysSetting_Get();
     }
-    /* Keep startup identical to the validated firmware. Persistent calibration
-     * is loaded after the UI is alive, so an EEPROM fault cannot hide the UI. */
     Gate_Set_Mode(Sys_Get_CurrentRangeMode());
     pico_diag_storage_init();
 
@@ -106,6 +104,7 @@ void HardwareInitTask(void *argument)
         NVIC_SystemReset();
     }
     #else
+    /* Load calibration and perform pending EEPROM migration after UI setup. */
     Sys_AdcCalibration_Init();
     #endif
 

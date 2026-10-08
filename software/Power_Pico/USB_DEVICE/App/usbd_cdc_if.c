@@ -268,7 +268,7 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
-  /* Queue every received USB block. CmdStrategy_Feed() performs framing,
+  /* Queue every received USB block. CmdStrategy_ProcessRx() performs framing,
    * length and CRC parsing in the receive task, so split frames are retained. */
   if (CmdRxQueue != NULL && *Len > 0U && *Len <= CMD_RX_CHUNK_SIZE) {
       CmdRxChunk_t chunk;

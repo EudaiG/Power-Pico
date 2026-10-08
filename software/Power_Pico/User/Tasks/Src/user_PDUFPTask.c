@@ -100,7 +100,7 @@ static void probe_publish(void)
     probe_snapshot = probe.status;
     if (upgrade_pending && probe.target_voltage == PD_V(5.0) &&
         fixed_voltage_control_active(&probe)) {
-        /* The UI describes a 9V trial, not the background 5V contract. */
+        /* Report foreground request progress, not the background 5V contract. */
         probe_snapshot.state = probe.status.state == fixed_voltage_control_ATTACH ?
             fixed_voltage_control_ATTACH : fixed_voltage_control_CAPS;
     }

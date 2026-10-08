@@ -42,13 +42,11 @@ void MessageReceiveTask(void *argument)
                               5U);
 
     if ((flags & 0x80000000U) == 0U && (flags & FLAG_USB_UPDATE_REQ) != 0U) {
-      // set the EEPROM flag
       EEPROM_UpdateCommand_Write(true);
       HAL_Delay(100);
       USER_USB_DEVICE_DeInit();
       // 给予PC足够的时间来识别设备断开
       HAL_Delay(500);
-      // reset
       NVIC_SystemReset();
     }
     if (CmdRxQueue != NULL) {
@@ -87,12 +85,10 @@ void MessageSendTask(void *argument)
                               osFlagsWaitAny,
                               osWaitForever);
 
-    // 2. 判断是不是出错了 (比如超时或者传参错误，通常返回值最高位会置1)
     if (flags & 0x80000000) {
-        continue; // 错误处理
+        continue;
     }
 
-    // 3. 检查具体是哪个标志位被置位了，然后处理对应的数据
     if (flags & FLAG_ADC_HALF_READY)
     {
       USB_ADC_Packet_t *packet = Process_ADC_Chunk(&adc_raw_buffer[0][0], 0);
