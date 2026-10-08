@@ -90,6 +90,8 @@ void HardwareInitTask(void *argument)
     lv_port_disp_init();
     ui_init();
 
+    Sys_AdcCalibration_Init();
+
     xTaskResumeAll();
 		vTaskDelete(NULL);
 	}
