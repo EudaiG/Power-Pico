@@ -11,6 +11,8 @@
 - Improved cold-start and PD negotiation when powered only through the input.
 - Fixed CMake build dependencies and application stack layout for the existing
   Bootloader. The Bootloader image is unchanged.
+- Synchronized Keil source entries and enabled the Modern UI. Added an
+  ARMCC 5 static-assert compatibility header without changing application code.
 - Kept upstream 1.1.7 CMD commands and calibration wire format, plus the
   `update\r\n` OTA entry.
 - Added USB receive backpressure for fragmented CMD frames and a dedicated
@@ -46,3 +48,6 @@ free-space measurement.
 - Fragmented CMD regression: 80/80 cases passed.
 - CMD plus continuous ADC duplex regression: 200/200 replies passed, with no
   missing or unexpected frames.
+- Keil Modern build passed with ARM Compiler 5.06 update 5 (build 528).
+  Its application vector table was checked; hardware flashing has not been
+  tested for the Keil image.

@@ -75,6 +75,11 @@ The repository also includes the release image
 `firmware/PowerPico_Firmware_v1.2.0.bin` and the Bootloader
 `firmware/PowerPico_BootLoader.hex`.
 
+For Keil, open `software/Power_Pico/MDK-ARM/power_pico.uvprojx` and build the
+`power_pico` target. It shares application source with CMake and defaults to the
+Modern UI. Output: `MDK-ARM/power_pico/power_pico.bin`. See the
+[Keil build notes](software/Power_Pico/MDK-ARM/README.md).
+
 ### 3. Version 1.2.0 Changes
 - Redesigned the Modern UI with rounded cards, improved instrument values,
   list focus states, brightness control, and voltage-control pages.

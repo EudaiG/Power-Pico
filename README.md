@@ -72,6 +72,8 @@
 
 仓库中的 `firmware/PowerPico_Firmware_v1.2.0.bin` 是当前发布固件，`firmware/PowerPico_BootLoader.hex` 是 Bootloader。
 
+使用 Keil 时，打开 `software/Power_Pico/MDK-ARM/power_pico.uvprojx`，编译 `power_pico` 目标。工程与 CMake 共用功能源码，默认启用 Modern UI，输出为 `MDK-ARM/power_pico/power_pico.bin`。配置说明见 [Keil 编译说明](software/Power_Pico/MDK-ARM/README.md)。
+
 ### 3. 1.2.0 版本改动
 - 重做 Modern UI：采用更圆润的卡片式布局，优化首页仪表显示、列表焦点、亮度滑条和电压调节页面。
 - 添加主题选择功能，支持多套高饱和度配色，并保留 Classic UI 构建选项。
